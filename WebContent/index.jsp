@@ -35,7 +35,7 @@ $(document).ready(function(){
 				var info = eval("("+data+")");
 				var loginResult = info.result;
 				if(loginResult == "success"){
-					alert("登陆成功！");
+					window.location.href = "issueinfo.jsp";
 					$btn.button('reset');
 				}else{
 					alert("登陆失败！用户名或密码错误！");

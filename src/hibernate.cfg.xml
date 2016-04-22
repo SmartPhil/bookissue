@@ -19,5 +19,7 @@
 		<!-- SQL server dialect -->
 		<property name="dialect">org.hibernate.dialect.SQLServer2008Dialect</property>
 		<property name="show_sql">true</property>
+		
+		<mapping resource="com/xdf/dto/BookCount.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

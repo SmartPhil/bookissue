@@ -9,4 +9,11 @@
 			</result>
 		</action>
 	</package>
+	<package name="import" extends="json-default">
+		<action name="importExcel" class="com.xdf.action.Action_ImportExcel" method="importExcel">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
 </struts>
