@@ -13,17 +13,30 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var table = $("#bookInfoTab").DataTable({});
+	
 	$("#search").click(function(){
 		var begin = $("#startDate").val();
 		var end = $("#endDate").val();
 		
 		$.ajax({
-			url : '',
+			url : 'search.action',
 			type : 'post',
 			data : {'beginDate' : begin,'endDate' : end},
 			dataType : 'json',
 			success : function(e){
-				
+				var data = eval("(" + e +")");
+				table.clear().draw(false);
+				for (var i = 0; i < data.length; i++) {
+					var obj = [
+								data[i].code,data[i].beginDate,
+							   	data[i].endDate,data[i].bookDeliveryType,
+							   	data[i].printTime,data[i].currentCount,
+							   	data[i].maxCount,data[i].deliveryCount,
+							   	data[i].reIssue,data[i].memo
+							  ];
+					table.row.add(obj).draw(false);
+				}
 			},
 			error : function(e){
 				alert("查询出错！请联系管理员！" );

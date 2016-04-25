@@ -7,7 +7,7 @@ public class BS_Class {
 	private Date beginDate;
 	private Date endDate;
 	private String bookDeliveryType;
-	private String beginClassTime;
+	private String printTime;
 	private int currentCount;
 	private int maxCount;
 	private int deliveryCount;
@@ -38,11 +38,11 @@ public class BS_Class {
 	public void setBookDeliveryType(String bookDeliveryType) {
 		this.bookDeliveryType = bookDeliveryType;
 	}
-	public String getBeginClassTime() {
-		return beginClassTime;
+	public String getPrintTime() {
+		return printTime;
 	}
-	public void setBeginClassTime(String beginClassTime) {
-		this.beginClassTime = beginClassTime;
+	public void setPrintTime(String printTime) {
+		this.printTime = printTime;
 	}
 	public int getCurrentCount() {
 		return currentCount;
