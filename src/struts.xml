@@ -20,5 +20,7 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="export" class="com.xdf.action.Action_Export" method="export">
+		</action>
 	</package>
 </struts>

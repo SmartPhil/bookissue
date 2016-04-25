@@ -9,16 +9,11 @@ import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.transform.ResultTransformer;
 import org.hibernate.transform.Transformers;
 
-import com.sun.org.apache.xalan.internal.xsltc.cmdline.Transform;
 import com.xdf.dao.BS_ClassDao;
 import com.xdf.dto.BS_Class;
 import com.xdf.util.HibernateUtil;
-
-import javassist.compiler.ast.NewExpr;
-import javassist.convert.Transformer;
 
 public class BS_ClassDaoImpl implements BS_ClassDao {
 

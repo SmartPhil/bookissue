@@ -43,6 +43,13 @@ $(document).ready(function(){
 			}
 		})
 	});
+	
+	$("#export").click(function(){
+		var begin = $("#startDate").val();
+		var end = $("#endDate").val();
+		var param = "?begin=" + begin + "&end=" + end;
+		window.location.href = "export.action" + param;
+	});
 });
 </script>
 </head>

@@ -13,8 +13,6 @@ import com.xdf.dao.BS_ClassDao;
 import com.xdf.dao.impl.BS_ClassDaoImpl;
 import com.xdf.dto.BS_Class;
 
-import sun.java2d.pipe.SpanShapeRenderer.Simple;
-
 @SuppressWarnings("serial")
 public class Action_Search extends ActionSupport {
 	private String beginDate;
