@@ -3,7 +3,6 @@ package com.xdf.action;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,9 +20,11 @@ import com.xdf.util.ExcelReader;
 public class Action_ImportExcel extends ActionSupport {
 	private File file_upload;
 	private String fileName;
+	private String flag;
 	private Object result;
 	private String username;
 	public String importExcel(){
+		System.out.println(flag);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		try {
 			String path = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/UploadFiles");
@@ -37,6 +38,9 @@ public class Action_ImportExcel extends ActionSupport {
 			ExcelReader excelReader = new ExcelReader(target.getPath());
 			List<String[]> resultList = excelReader.readAllData();
 			List<BookCount> bookCountList = new ArrayList<BookCount>();
+			BookCountDao bookCountDao = new BookCountDaoImpl();
+			//获取所有配送信息
+			List<BookCount> bookCounts = bookCountDao.getAllBookCount();
 			if(resultList.size() >= 1){
 				for (int i = 0; i < resultList.size(); i++) {
 					BookCount bookcount = new BookCount();
@@ -50,10 +54,38 @@ public class Action_ImportExcel extends ActionSupport {
 				}
 				
 				//保存数据
-				BookCountDao bookCountDao = new BookCountDaoImpl();
-				for (BookCount bookCount : bookCountList) {
-					bookCountDao.insertBookCount(bookCount);
+				if ("0".equals(flag)) {
+					for (BookCount bookCount : bookCountList) {
+				    	int mark = 0;
+						for (BookCount bookCount1 : bookCounts) {
+							if (bookCount1.getClassCode().equals(bookCount.getClassCode())) {
+								bookCount1.setCount(bookCount.getCount());
+								bookCountDao.updateBookCount(bookCount1);
+								mark = 1; 
+								break;
+							}
+						}
+						if (mark == 0) {
+							bookCountDao.insertBookCount(bookCount);
+						}
+					}
+				}else if ("1".equals(flag)) {
+					for (BookCount bookCount : bookCountList) {
+				    	int mark = 0;
+						for (BookCount bookCount1 : bookCounts) {
+							if (bookCount1.getClassCode().equals(bookCount.getClassCode())) {
+								bookCount1.setCount(bookCount.getCount() + bookCount1.getCount());
+								bookCountDao.updateBookCount(bookCount1);
+								mark = 1;
+								break;
+							}
+						}
+						if (mark == 0) {
+							bookCountDao.insertBookCount(bookCount);
+						}
+					}
 				}
+			    
 				map.put("result", "success");
 			}else {
 				System.out.println("上传的是空文件！");
@@ -79,20 +111,22 @@ public class Action_ImportExcel extends ActionSupport {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
 	public Object getResult() {
 		return result;
 	}
-
 	public void setResult(Object result) {
 		this.result = result;
 	}
-
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 }

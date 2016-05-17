@@ -54,7 +54,11 @@ public class Action_Search extends ActionSupport {
 			map.put("code", bs_Class.getClassCode());
 			map.put("beginDate", sdf.format(bs_Class.getBeginDate()));
 			map.put("endDate", sdf.format(bs_Class.getEndDate()));
-			map.put("bookDeliveryType", "有教材，开课前领取");
+			if ("0".equals(bs_Class.getBookDeliveryType())) {
+				map.put("bookDeliveryType", "无教材");
+			}else if ("1".equals(bs_Class.getBookDeliveryType())) {
+				map.put("bookDeliveryType", "有教材，开课前领取");
+			}
 			map.put("printTime", bs_Class.getPrintTime());
 			map.put("currentCount", String.valueOf(bs_Class.getCurrentCount()));
 			map.put("maxCount", String.valueOf(bs_Class.getMaxCount()));

@@ -15,7 +15,10 @@
 $(document).ready(function(){
 	var table = $("#bookInfoTab").DataTable({});
 	
+	
 	$("#search").click(function(){
+		$btn = $(this).button("loading");
+		
 		var begin = $("#startDate").val();
 		var end = $("#endDate").val();
 		
@@ -37,8 +40,10 @@ $(document).ready(function(){
 							  ];
 					table.row.add(obj).draw(false);
 				}
+				$btn.button("reset");
 			},
 			error : function(e){
+				$btn.button("reset");
 				alert("查询出错！请联系管理员！" );
 			}
 		})

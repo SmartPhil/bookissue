@@ -39,7 +39,7 @@ public class BS_ClassDaoImpl implements BS_ClassDao {
 					   + "from NIS_DY.[NIS_DY].[dbo].BS_Class a,bookcount b "
 					   + "where a.sCode in (select b.sClassCode from bookcount) "
 					   + "and a.dtBeginDate >= ? and dtBeginDate <= ? "
-					   + "and a.ClassBookDeliveryType = 1";
+					   + "and (a.ClassBookDeliveryType = 1 or a.ClassBookDeliveryType = 0)";
 			Query query = session.createSQLQuery(sql);
 			query.setString(0, begin);
 			query.setString(1, end);
