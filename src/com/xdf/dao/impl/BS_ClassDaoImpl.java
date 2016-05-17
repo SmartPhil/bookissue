@@ -56,20 +56,20 @@ public class BS_ClassDaoImpl implements BS_ClassDao {
 					bs_Class.setEndDate(sdf.parse(map.get("dtEndDate").toString()));
 					bs_Class.setBookDeliveryType(map.get("ClassBookDeliveryType").toString());
 					bs_Class.setPrintTime(map.get("sPrintTime").toString());
-					if (!"".equals(map.get("nCurrentCount").toString()) && map.get("nCurrentCount") != null) {
+					if (map.get("nCurrentCount") != null) {
 						bs_Class.setCurrentCount(Integer.parseInt(map.get("nCurrentCount").toString()));
 					}else {
-						bs_Class.setCurrentCount(0);
+						continue;
 					}
-					if (!"".equals(map.get("nMaxCount").toString()) && map.get("nMaxCount") != null) {
+					if (map.get("nMaxCount") != null) {
 						bs_Class.setMaxCount(Integer.parseInt(map.get("nMaxCount").toString()));
 					}else {
-						bs_Class.setMaxCount(0);
+						continue;
 					}
-					if (!"".equals(map.get("nCount").toString()) && map.get("nCount") != null) {
+					if (map.get("nCount") != null) {
 						bs_Class.setDeliveryCount(Integer.parseInt(map.get("nCount").toString()));
 					}else {
-						bs_Class.setDeliveryCount(0);
+						continue;
 					}
 					resultList.add(bs_Class);
 				}
